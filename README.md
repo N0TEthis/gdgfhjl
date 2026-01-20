@@ -83,5 +83,35 @@ SELECT *
   FROM user2 as A1
   right JOIN bb2  as B1
     ON B1.id = A1.id
+
+
+
+
+
+
+
+
+   CREATE TABLE user2 (name varchar(255) , book varchar(255) );
+insert into user2 values
+('miao','mim'),
+('mami','mim')
+;
+
+
+CREATE TABLE bb2 (name varchar(255), book varchar(255));
+insert into bb2 values
+( 'oppo' , 'mem'),
+( 'geg' , 'mem')
+;
+ select count(*) from (
+SELECT name ,book FROM user2 union
+SELECT name ,book FROM user2 union 
+SELECT  name, book FROM bb2 );
+select count(*) from (
+SELECT name ,book FROM user2 union all
+SELECT name ,book FROM user2 union all
+SELECT  name, book FROM bb2 );
+
+   
    
   
