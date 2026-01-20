@@ -1,4 +1,33 @@
 # gdgfhjl
+CREATE TABLE user2 (id int,age int ,name varchar(255) );
+insert into user2 values
+(1000,16,'miao'),
+(1100,17, 'mami'),
+(1110,17, 'msms'),
+(1111 ,18,'geg')
+;
+select id , name as "students" , age from user2 ;
+
+CREATE TABLE bb2 (btime timestamp ,ktime timestamp, id int );
+insert into bb2 values
+( '2023-12-09 9:00:34' , '2023-12-09 18:10:32' ,1000),
+( '2023-12-09 8:39:13' , '2023-12-09 15:35:24' ,1100),
+( '2023-12-09 10:01:56' , '2023-12-09 15:30:17' ,1110),
+( '2023-12-09 7:10:14' , '2023-12-09 16:07:02' , 1111)
+;
+select btime , ktime as "ktime" , id from bb2 ;
+
+SELECT *             
+  FROM user2 as A1
+  JOIN bb2  as B1
+    ON B1.id = A1.id
+   
+  
+
+
+
+
+
 
 
 
