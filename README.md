@@ -203,6 +203,34 @@ insert into b2 values
 
 
 
+
+
+
+CREATE TABLE users (id SERIAL PRIMARY KEY,
+    full_name VARCHAR(255) NOT NULL,
+    address TEXT,
+    inn VARCHAR(12) UNIQUE,
+    kpp VARCHAR(9),
+    email VARCHAR(100) UNIQUE,
+    age INTEGER,
+    CONSTRAINT check_age CHECK (age < 100),
+    CONSTRAINT check_name_no_digits CHECK (full_name !~ '[0-9]'),
+    CONSTRAINT check_no_capitals CHECK (
+        address NOT ILIKE '%Москва%' AND 
+        address NOT ILIKE '%Мск%' AND
+        address NOT ILIKE '%Петербург%' AND
+        address NOT ILIKE '%СПб%'
+    ));
+    
+insert into users (full_name, address, inn, kpp, email, age) VALUES 
+('Иван Иванoв', 'Бийск, Максима Горького ул., д. 22', '7701234567', '770101001', 'ivan@mail.ru', 25),
+('Анна Петрова', 'Якутск, Школьный пер., д. 9', '7810987654', '781001001', 'anna@yandex.ru', 30),
+('Сергей Сидоров', 'Кострома, Кирова ул., д. 14', '1655123456', '165501001', 'serg@gmail.com', 45);
+   
+select full_name, address, inn, kpp, email, age from users;
+
+
+
 SELECT *            
 FROM user2 as A1
 INNER JOIN  bb2 as B1 ON A1.name = B1.name 
