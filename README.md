@@ -237,4 +237,33 @@ INNER JOIN  bb2 as B1 ON A1.name = B1.name
 INNER JOIN b2 as C1 ON B1.name = C1.name;
 
 
-  
+
+
+
+  CREATE TABLE users (id SERIAL PRIMARY KEY,
+    full_name VARCHAR(255) NOT NULL,
+    address TEXT,
+    inn VARCHAR(12) UNIQUE,
+    kpp VARCHAR(9),
+    email VARCHAR(100) UNIQUE,
+    age INTEGER)
+;
+   
+
+alter table users 
+	add CONSTRAINT check_inn_format CHECK (inn ~ '^[0-9]{12}$');
+alter table users 
+	add    CONSTRAINT check_kpp_format CHECK (kpp ~ '^[0-9]{9}$');
+alter table users 
+	add  CONSTRAINT check_age CHECK (age < 100);
+alter table users 
+   add CONSTRAINT check_name_no_digits CHECK (full_name !~ '[0-9]');
+alter table users 
+   add CONSTRAINT check_no_capitals CHECK (address !~* 'москва|петербург|спб|мск');
+
+
+insert into users (full_name, address, inn, kpp, email, age) VALUES 
+('Иван Иванoв', 'Бийск, Максима Горького ул., д. 22', '7701234567', '770101001', 'ivan@mail.ru', 25),
+('Анна Петрова', 'Якутск, Школьный пер., д. 9', '7810987654', '781001001', 'anna@yandex.ru', 30),
+('Сергей Сидоров', 'Кострома, Кирова ул., д. 14', '1655123456', '165501001', 'serg@gmail.com', 45);
+   
