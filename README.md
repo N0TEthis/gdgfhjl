@@ -428,4 +428,29 @@ insert into users (full_name, address, inn, kpp, email, age) VALUES
 ('Анна Петрова', 'Якутск, Школьный пер., д. 9', '7810987654', '781001001', 'anna@yandex.ru', 30),
 
 ('Сергей Сидоров', 'Кострома, Кирова ул., д. 14', '1655123456', '165501001', 'serg@gmail.com', 45);
+
+
+
+
+
+
+CREATE TABLE student  (DP int, age int, weigh int, sex varchar(1));
+
+insert into  student (DP, age, weigh,sex) VALUES 
+
+(1,22,50,'f'),
+
+(2,11,51,'f'),
+
+(2,12,52,'m'),
+
+(1,33,53,'m');
+
+
+select * , avg(age) over ( partition by DP) as MAX_AGE,
+
+sum(weigh) over ( partition by sex) as MAX_WGH
+
+from student;
+ 
    
