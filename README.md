@@ -329,33 +329,33 @@ insert into b2 values
 
 CREATE TABLE users (id SERIAL PRIMARY KEY,
 
-    full_name VARCHAR(255) NOT NULL,
+full_name VARCHAR(255) NOT NULL,
 	
-    address TEXT,
+ address TEXT,
 	
-    inn VARCHAR(12) UNIQUE,
+inn VARCHAR(12) UNIQUE,
 	
-    kpp VARCHAR(9),
+ kpp VARCHAR(9),
 	
-    email VARCHAR(100) UNIQUE,
+ email VARCHAR(100) UNIQUE,
 	
-    age INTEGER,
+age INTEGER,
+
+CONSTRAINT check_age CHECK (age < 100),
 	
-    CONSTRAINT check_age CHECK (age < 100),
+ CONSTRAINT check_name_no_digits CHECK (full_name !~ '[0-9]'),
 	
-    CONSTRAINT check_name_no_digits CHECK (full_name !~ '[0-9]'),
+CONSTRAINT check_no_capitals CHECK (
 	
-    CONSTRAINT check_no_capitals CHECK (
-	
-        address NOT ILIKE '%Москва%' AND 
+address NOT ILIKE '%Москва%' AND 
 		
-        address NOT ILIKE '%Мск%' AND
+ address NOT ILIKE '%Мск%' AND
 		
-        address NOT ILIKE '%Петербург%' AND
+address NOT ILIKE '%Петербург%' AND
 		
-        address NOT ILIKE '%СПб%'
+address NOT ILIKE '%СПб%'
 		
-    ));
+));
     
 insert into users (full_name, address, inn, kpp, email, age) VALUES 
 
@@ -384,32 +384,32 @@ INNER JOIN b2 as C1 ON B1.name = C1.name;
 
   CREATE TABLE users (id SERIAL PRIMARY KEY,
   
-    full_name VARCHAR(255) NOT NULL,
+full_name VARCHAR(255) NOT NULL,
 	
-    address TEXT,
+ address TEXT,
 	
-    inn VARCHAR(12) UNIQUE,
+ inn VARCHAR(12) UNIQUE,
 	
-    kpp VARCHAR(9),
+ kpp VARCHAR(9),
 	
-    email VARCHAR(100) UNIQUE,
+email VARCHAR(100) UNIQUE,
 	
-    age INTEGER)
+ age INTEGER)
 	
 ;
    
 
 alter table users 
 
-	add CONSTRAINT check_inn_format CHECK (inn ~ '^[0-9]{12}$');
+add CONSTRAINT check_inn_format CHECK (inn ~ '^[0-9]{12}$');
 	
 alter table users 
 
-	add    CONSTRAINT check_kpp_format CHECK (kpp ~ '^[0-9]{9}$');
+add    CONSTRAINT check_kpp_format CHECK (kpp ~ '^[0-9]{9}$');
 	
 alter table users 
 
-	add  CONSTRAINT check_age CHECK (age < 100);
+add  CONSTRAINT check_age CHECK (age < 100);
 	
 alter table users 
 
