@@ -453,4 +453,22 @@ sum(weigh) over ( partition by sex) as MAX_WGH
 
 from student;
  
-   
+
+
+
+
+
+   CREATE TABLE student (data TIME, name varchar);
+insert into student (data , name) VALUES
+('00:00:00','f'),
+('00:00:01','f'),
+('00:00:02','f'),
+('00:00:03','t'),
+('00:00:05','g'),
+('00:04:00','m'),
+('00:00:10','p'),
+('00:00:11','p'),
+('00:00:10','p');
+
+SELECT data, name,COUNT(name) OVER ( ORDER BY data ROWS BETWEEN 3 PRECEDING AND CURRENT ROW ) as nn 
+FROM student;(недоделанно)
